@@ -1,0 +1,19 @@
+.sections {
+  color: #a5a5a5;
+  align-self: center;
+  .sectionsUl {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    li {
+      cursor: pointer;
+      padding: 2px 4px;
+      border-color: rgba(204, 25, 25, 0.596);
+      &:hover,
+      &:active {
+        scale: 1.1;
+        color: #6b6b6b;
+      }
+    }
+  }
+}
