@@ -1,6 +1,6 @@
-import { useContext } from "react";
-import { Check, Remove } from "../../icons";
+import { useContext, createContext } from "react";
 import { todoContext } from "../wrapperComponent";
+import TodoItem from "./todoItem/";
 import "./style.scss";
 
 interface Todo {
@@ -37,111 +37,26 @@ const TodoList = () => {
   };
   return (
     <div className={`todoList`}>
-      {context?.todos.map((item, index: number) => {
-        if (context?.selectedPage === 0) {
-          return (
-            <div className="todoItem" key={index}>
-              <div className="leftPart">
-                <div
-                  className={`icon`}
-                  style={{
-                    opacity: item.selected ? "1" : "",
-                  }}
-                  onClick={() => selectTodo(item.id)}
-                >
-                  <Check />
-                </div>
-                <span
-                  style={{
-                    textDecoration: item.selected ? "line-through" : "none",
-                    color: item.selected ? "#8080808a" : "",
-                    fontWeight: item.selected ? "500" : "300",
-                  }}
-                  onClick={() => {
-                    context?.setEditButton(true);
-                    handleClick(item);
-                  }}
-                >
-                  {item.text}
-                </span>
-              </div>
-              <div className="rightPart" onClick={() => removeTodo(item)}>
-                <Remove />
-              </div>
-            </div>
-          );
-        }
-        if (context?.selectedPage === 1) {
-          if (!item.selected) {
-            return (
-              <div className="todoItem" key={index}>
-                <div className="leftPart">
-                  <div
-                    className={`icon`}
-                    style={{
-                      opacity: item.selected ? "1" : "",
-                    }}
-                    onClick={() => selectTodo(item.id)}
-                  >
-                    <Check />
-                  </div>
-                  <span
-                    style={{
-                      textDecoration: item.selected ? "line-through" : "none",
-                      color: item.selected ? "#8080808a" : "",
-                      fontWeight: item.selected ? "500" : "300",
-                    }}
-                    onClick={(e) => {
-                      context?.setEditButton(true);
-                      handleClick(item);
-                    }}
-                  >
-                    {item.text}
-                  </span>
-                </div>
-                <div className="rightPart" onClick={() => removeTodo(item)}>
-                  <Remove />
-                </div>
-              </div>
-            );
+      {context?.todos
+        .filter((item) => {
+          if (context?.selectedPage === 0) {
+            return true;
+          } else if (context?.selectedPage === 1) {
+            return !item.selected;
+          } else if (context?.selectedPage === 2) {
+            return item.selected;
           }
-        }
-        if (context?.selectedPage === 2) {
-          if (item.selected) {
-            return (
-              <div className="todoItem" key={index}>
-                <div className="leftPart">
-                  <div
-                    className={`icon`}
-                    style={{
-                      opacity: item.selected ? "1" : "",
-                    }}
-                    onClick={() => selectTodo(item.id)}
-                  >
-                    <Check />
-                  </div>
-                  <span
-                    style={{
-                      textDecoration: item.selected ? "line-through" : "none",
-                      color: item.selected ? "#8080808a" : "",
-                      fontWeight: item.selected ? "500" : "300",
-                    }}
-                    onClick={(e) => {
-                      context?.setEditButton(true);
-                      handleClick(item);
-                    }}
-                  >
-                    {item.text}
-                  </span>
-                </div>
-                <div className="rightPart" onClick={() => removeTodo(item)}>
-                  <Remove />
-                </div>
-              </div>
-            );
-          }
-        }
-      })}
+        })
+        .map((item, index) => (
+          <TodoItem
+            key={index}
+            index={index}
+            item={item}
+            selectTodo={selectTodo}
+            handleClick={handleClick}
+            removeTodo={removeTodo}
+          />
+        ))}
     </div>
   );
 };
