@@ -23,7 +23,6 @@
     border: 1px solid #c4c4c4;
     outline: none;
     font-family: "Montserrat", sans-serif;
-    // position: relative;
     &::placeholder {
       color: #c4c4c483;
     }
@@ -37,7 +36,7 @@
     font-weight: 800;
     animation: errorShake 0.1s 4;
   }
-  .saveButton {
+  .save-button {
     cursor: pointer;
     padding: 10px 20px;
     font-size: 22px;

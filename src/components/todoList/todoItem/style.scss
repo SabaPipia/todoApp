@@ -1,6 +1,61 @@
-.todoItem {
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  font-family: "Montserrat", sans-serif;
+  border: 1px solid #c4c4c4;
+  border-top-color: #c4c4c43d;
+  border-bottom-color: #c4c4c43d;
   li {
     font-weight: 300;
     font-size: 25px;
+  }
+  svg {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    padding: 10px;
+  }
+  .left-part {
+    display: flex;
+    align-items: center;
+    .line-through {
+      text-decoration: line-through;
+      color: #8080808a;
+      font-weight: 500;
+    }
+    span {
+      cursor: pointer;
+      font-weight: 300;
+      font-size: 25px;
+    }
+    .icon {
+      opacity: 0.2;
+      svg {
+        fill: rgba(128, 128, 128, 0.555);
+      }
+      &:hover {
+        transition: all 0.5s;
+        opacity: 1;
+        svg {
+          fill: green;
+        }
+      }
+      &.opacity {
+        opacity: 1;
+        svg {
+          fill: rgb(1, 131, 1);
+        }
+      }
+    }
+  }
+  .right-part {
+    svg {
+      opacity: 0;
+    }
+    svg:hover,
+    svg:active {
+      transition: all 0.5s;
+      opacity: 1;
+    }
   }
 }

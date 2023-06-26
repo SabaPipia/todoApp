@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
+import classNames from "classnames";
 import { Check, Remove } from "../../../icons";
 
 import "./style.scss";
 import { todoContext } from "../../wrapperComponent";
+
 type todo = {
   text: string;
   id: number;
@@ -25,23 +27,16 @@ const TodoItem: React.FC<TodoItemProps> = ({
 }) => {
   const context = useContext(todoContext);
   return (
-    <div className="todoItem" key={index}>
-      <div className="leftPart">
+    <div className="todo-item" key={index}>
+      <div className="left-part">
         <div
-          className={`icon`}
-          style={{
-            opacity: item.selected ? "1" : "",
-          }}
+          className={classNames("icon", { opacity: item.selected })}
           onClick={() => selectTodo(item.id)}
         >
           <Check />
         </div>
         <span
-          style={{
-            textDecoration: item.selected ? "line-through" : "none",
-            color: item.selected ? "#8080808a" : "",
-            fontWeight: item.selected ? "500" : "300",
-          }}
+          className={classNames({ "line-through": item.selected })}
           onClick={() => {
             context?.setEditButton(true);
             handleClick(item);
@@ -50,7 +45,7 @@ const TodoItem: React.FC<TodoItemProps> = ({
           {item.text}
         </span>
       </div>
-      <div className="rightPart" onClick={() => removeTodo(item)}>
+      <div className="right-part" onClick={() => removeTodo(item)}>
         <Remove />
       </div>
     </div>

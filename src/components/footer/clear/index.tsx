@@ -1,14 +1,13 @@
 import { useContext } from "react";
-import "./style.scss";
+
 import { footerContext } from "../../wrapperComponent";
+import "./style.scss";
 
 const Clear = () => {
   const context = useContext(footerContext);
+
   const clearCompleted = () => {
-    const updatedTodos: any = context?.todos.filter(
-      (todo) => todo.selected !== true
-    );
-    context?.setTodos([...updatedTodos]);
+    context?.setTodos(context?.todos.filter((todo) => !todo.selected));
   };
 
   return (

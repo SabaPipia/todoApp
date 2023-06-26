@@ -1,7 +1,7 @@
 .sections {
   color: #a5a5a5;
   align-self: center;
-  .sectionsUl {
+  .sections-ul {
     display: flex;
     list-style: none;
     gap: 20px;
@@ -13,6 +13,9 @@
       &:active {
         scale: 1.1;
         color: #6b6b6b;
+      }
+      &.section-item-active {
+        border: 1px solid rgba(204, 25, 25, 0.596);
       }
     }
   }

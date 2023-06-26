@@ -1,7 +1,6 @@
-import { useContext, createContext } from "react";
+import { useContext } from "react";
 import { todoContext } from "../wrapperComponent";
 import TodoItem from "./todoItem/";
-import "./style.scss";
 
 interface Todo {
   text?: string;
@@ -18,33 +17,36 @@ const TodoList = () => {
   };
 
   const removeTodo = (todo: Todo) => {
-    const newTodo: any = context?.todos.filter((item) => todo.id !== item.id);
-    context?.setTodos([...newTodo]);
-    console.log(newTodo);
+    context?.setTodos(context?.todos.filter((item) => todo.id !== item.id));
   };
 
   const selectTodo = (id?: number) => {
-    const updatedTodos: any = context?.todos.map((item) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          selected: !item.selected,
-        };
-      }
-      return item;
-    });
-    context?.setTodos(updatedTodos);
+    context?.setTodos(
+      context?.todos.map((item) => {
+        if (item.id === id) {
+          return {
+            ...item,
+            selected: !item.selected,
+          };
+        }
+        return item;
+      })
+    );
   };
   return (
-    <div className={`todoList`}>
+    <div className={"todoList"}>
       {context?.todos
         .filter((item) => {
-          if (context?.selectedPage === 0) {
-            return true;
-          } else if (context?.selectedPage === 1) {
-            return !item.selected;
-          } else if (context?.selectedPage === 2) {
-            return item.selected;
+          switch (context?.selectedPage) {
+            case "ALL":
+              return true;
+            case "ACTIVE":
+              return !item.selected;
+            case "COMPLETED":
+              return item.selected;
+            default:
+              return false;
+            // break;
           }
         })
         .map((item, index) => (

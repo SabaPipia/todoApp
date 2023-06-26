@@ -1,25 +1,29 @@
 import { useContext } from "react";
-import "./style.scss";
+
 import { footerContext } from "../../wrapperComponent";
+import "./style.scss";
 
 const Items = () => {
   const context = useContext(footerContext);
+
   const itemCounter = () => {
     let count = 0;
     switch (context?.selectedPage) {
-      case 0:
-      case 1:
+      case "ALL":
+      case "ACTIVE":
         context?.todos.map((todo) => {
           if (!todo.selected) {
             count++;
           }
+          return count;
         });
         break;
-      case 2:
+      case "COMPLETED":
         context?.todos.map((todo) => {
           if (todo.selected) {
             count++;
           }
+          return count;
         });
         break;
     }

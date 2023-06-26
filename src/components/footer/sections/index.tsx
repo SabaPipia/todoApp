@@ -1,49 +1,45 @@
-import { useState, useContext } from "react";
-import "./style.scss";
+import { useContext } from "react";
+import classNames from "classnames";
+
 import { footerContext } from "../../wrapperComponent";
+import "./style.scss";
 
 const Sections = () => {
   const context = useContext(footerContext);
-  const [key, setK] = useState<number>(0);
-  const handleSelect = (key: number) => {
-    context?.setSelectedPage(key);
-    setK(key);
+
+  const handleSelect = (filter: string) => {
+    context?.setSelectedPage(filter);
   };
+
   return (
     <div className="sections">
-      <ul className="sectionsUl">
+      <ul className="sections-ul">
         <li
-          data-key={0}
-          style={{
-            border: key === 0 ? "1px solid rgba(204, 25, 25, 0.596)" : "",
-          }}
-          onClick={(e) => {
-            const key = Number(e.currentTarget.getAttribute("data-key"));
-            handleSelect(key);
+          className={classNames({
+            "section-item-active": context?.selectedPage === "ALL",
+          })}
+          onClick={() => {
+            handleSelect("ALL");
           }}
         >
           All
         </li>
         <li
-          data-key={1}
-          style={{
-            border: key === 1 ? "1px solid rgba(204, 25, 25, 0.596)" : "",
-          }}
-          onClick={(e) => {
-            const key = Number(e.currentTarget.getAttribute("data-key"));
-            handleSelect(key);
+          className={classNames({
+            "section-item-active": context?.selectedPage === "ACTIVE",
+          })}
+          onClick={() => {
+            handleSelect("ACTIVE");
           }}
         >
           Active
         </li>
         <li
-          data-key={2}
-          style={{
-            border: key === 2 ? "1px solid rgba(204, 25, 25, 0.596)" : "",
-          }}
-          onClick={(e) => {
-            const key = Number(e.currentTarget.getAttribute("data-key"));
-            handleSelect(key);
+          className={classNames({
+            "section-item-active": context?.selectedPage === "COMPLETED",
+          })}
+          onClick={() => {
+            handleSelect("COMPLETED");
           }}
         >
           Completed

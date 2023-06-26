@@ -20,18 +20,18 @@ interface inputType {
   modifyID?: number;
 }
 interface todoType {
-  todos: Todo[];
   setTodos: (todo: Todo[]) => void;
   setValue: (value: string) => void;
   setEditButton: (edit: boolean) => void;
   setModifyID: (id: number) => void;
-  selectedPage: number;
+  todos: Todo[];
+  selectedPage: string;
 }
 interface footerType {
-  todos: Todo[];
-  selectedPage: number;
   setTodos: (todo: Todo[]) => void;
-  setSelectedPage: (page: number) => void;
+  setSelectedPage: (filter: string) => void;
+  todos: Todo[];
+  selectedPage: string;
 }
 
 export const inputContext = createContext<inputType | undefined>(undefined);
@@ -43,7 +43,7 @@ const WrapperComponent = () => {
   const [value, setValue] = useState<string>("");
   const [editButton, setEditButton] = useState<boolean>(false);
   const [modifyID, setModifyID] = useState<number>();
-  const [selectedPage, setSelectedPage] = useState(0);
+  const [selectedPage, setSelectedPage] = useState("ALL");
 
   return (
     <div className="wrapper">

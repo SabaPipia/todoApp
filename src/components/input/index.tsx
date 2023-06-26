@@ -1,4 +1,6 @@
 import { useRef, useState, useContext } from "react";
+import classNames from "classnames";
+
 import { inputContext } from "../wrapperComponent";
 import { Arrow } from "../../icons";
 import "./style.scss";
@@ -38,18 +40,17 @@ const Input = () => {
 
   const handleSave = () => {
     const input = inputRef.current?.value;
-    let id = Number(new Date());
+    // let id = ;
 
     if (input?.trim() === "") {
       setError("Uh-oh! Task field is blank. Please enter a task.");
       setIsBlank("error");
     } else {
       const todoItem: Todo = {
-        text: input ?? "",
-        id: id,
+        text: input || "",
+        id: Number(new Date()),
         selected: false,
       };
-
       addTodo(todoItem);
       setIsBlank("");
       setError("");
@@ -72,7 +73,7 @@ const Input = () => {
       <div onClick={markAll}>
         <Arrow />
       </div>
-      <p className={isBlank}>{error}</p>
+      <p className={classNames(isBlank)}>{error}</p>
       <input
         ref={inputRef}
         placeholder="what needs to be done?"
@@ -85,7 +86,7 @@ const Input = () => {
         }}
       />
       {context?.editButton ? (
-        <button onClick={modifyTodo} className="saveButton">
+        <button onClick={modifyTodo} className="save-button">
           Save
         </button>
       ) : null}
