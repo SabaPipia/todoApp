@@ -1,7 +1,3 @@
-// interface CheckI {
-//   handleClick: () => void;
-// }
-
 export const Arrow = () => {
   return (
     <svg

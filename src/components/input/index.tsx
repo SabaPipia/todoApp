@@ -40,7 +40,6 @@ const Input = () => {
 
   const handleSave = () => {
     const input = inputRef.current?.value;
-    // let id = ;
 
     if (input?.trim() === "") {
       setError("Uh-oh! Task field is blank. Please enter a task.");
